@@ -1,0 +1,24 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.addMissingImports": "always",
+    "source.organizeImports": "always"
+  },
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.semi": true,
+  "prettier.singleQuote": false,
+  "prettier.jsxSingleQuote": false,
+  "prettier.trailingComma": "es5",
+  "prettier.arrowParens": "always",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.userWords": ["tailwindcss", "trivago", "clsx"]
+}
