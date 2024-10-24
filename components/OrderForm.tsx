@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { postForm } from "@/lib/actions";
+import { postFormGoogleSpreadsheet } from "@/lib/actions";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -38,7 +38,7 @@ export default function OrderForm() {
 
   async function onSubmit(values: Inputs) {
     try {
-      const response = await postForm(values);
+      const response = await postFormGoogleSpreadsheet(values);
       if (response.status === 200) {
         toast.success(
           "Your order has been submitted successfully. We will contact you shortly."
