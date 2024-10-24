@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { postForm } from "@/lib/actions";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -23,19 +24,29 @@ const formSchema = z.object({
   address: z.string().min(1, { message: "Address is required" }),
 });
 
-type Inputs = z.infer<typeof formSchema>;
+export type Inputs = z.infer<typeof formSchema>;
 
 export default function OrderForm() {
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      address: "",
+    },
   });
 
-  function onSubmit(values: Inputs) {
+  async function onSubmit(values: Inputs) {
     try {
-      console.log(values);
-      toast.success(
-        "Your order has been submitted successfully. We will contact you shortly."
-      );
+      const response = await postForm(values);
+      if (response.status === 200) {
+        toast.success(
+          "Your order has been submitted successfully. We will contact you shortly."
+        );
+      } else {
+        toast.error("Failed to submit the form. Please try again.");
+      }
+      form.reset();
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -93,7 +104,9 @@ export default function OrderForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? "Submiting.." : "Submit"}
+        </Button>
       </form>
     </Form>
   );
