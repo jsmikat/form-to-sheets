@@ -5,23 +5,31 @@ import { document } from "@/services/spreadsheetClient";
 
 export async function postFormGoogleSpreadsheet({
   name,
+  phone,
   email,
   address,
   product,
+  quantity,
+  paymentMethod,
+  transactionId,
 }: FormProps) {
   try {
     const date = new Date().toLocaleDateString("en-us");
 
     await document.loadInfo();
 
-    const sheet = document.sheetsByIndex[0];
+    const sheet = document.sheetsByIndex[1];
 
     await sheet.addRow({
-      Email: email,
-      Name: name,
-      Address: address,
-      Product: product,
       Date: date,
+      "Customer Name": name,
+      "Contact Number": phone,
+      Email: email,
+      Address: address,
+      "Product ID": product,
+      Quantity: quantity,
+      "Payment Method": paymentMethod,
+      "Transaction ID": transactionId,
     });
 
     return { status: 200 };
@@ -47,7 +55,7 @@ export async function getOptions() {
     const options = values.map((value) => value.options);
     const prices = values.map((value) => value.prices);
 
-    return { data:{ options, prices }, status: 200 };
+    return { data: { options, prices }, status: 200 };
   } catch (err) {
     console.error("Failed to get options", err);
     throw new Error("Failed to get options");

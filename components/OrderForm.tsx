@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -16,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { postFormGoogleSpreadsheet } from "@/lib/actions";
+import { paymentMethods } from "@/lib/constants";
 import { FormProps, formSchema } from "@/lib/schema";
 
 import {
@@ -36,17 +39,20 @@ export default function OrderForm({
 }: {
   productOptions: ProductProps;
 }) {
-  // const [dropdownOptions, setDropdownOptions] = useState<
-  //   { options: string[]; prices: string[] } | undefined
-  // >();
+  const [price, setPrice] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const form = useForm<FormProps>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      phone: "",
       email: "",
       address: "",
       product: "",
+      quantity: 1,
+      paymentMethod: "",
+      transactionId: "",
     },
   });
 
@@ -88,7 +94,7 @@ export default function OrderForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mx-auto w-full max-w-3xl space-y-8 py-10"
+        className="relative mx-auto w-full max-w-3xl space-y-8 py-10"
       >
         <FormField
           control={form.control}
@@ -98,6 +104,20 @@ export default function OrderForm({
               <FormLabel>Full Name</FormLabel>
               <FormControl>
                 <Input placeholder="Enter your name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Contact Number</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your number" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -138,10 +158,20 @@ export default function OrderForm({
 
         <FormField
           control={form.control}
-          name={"product"}
+          name="product"
           render={({ field }) => (
             <FormItem>
-              <Select onValueChange={field.onChange}>
+              <FormLabel>Product</FormLabel>
+              <Select
+                onValueChange={(value) => {
+                  field.onChange(value);
+                  const selectedIndex = productOptions.options.indexOf(value);
+                  const selectedPrice = parseInt(
+                    productOptions.prices[selectedIndex]
+                  );
+                  setPrice(selectedPrice);
+                }}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select Product" />
@@ -158,7 +188,89 @@ export default function OrderForm({
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={form.formState.isSubmitting}>
+
+        <FormField
+          control={form.control}
+          name="quantity"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Quantity</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  min={1}
+                  placeholder="Enter your full address"
+                  {...field}
+                  onChange={(e) => {
+                    const inputNumber = Number(e.target.value);
+                    field.onChange(inputNumber);
+                    setQuantity(inputNumber);
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <p className="relative -bottom-4 text-sm">
+          <span className="text-rose-700">*</span> You have to pay 10% of the
+          total cost to confirm your order.
+        </p>
+        <div className="rounded-sm border border-green-600 p-4">
+          <div className="flex justify-between">
+            <p className="text-sm">Total Price</p>
+            <p className="text-sm">৳{price * quantity}</p>
+          </div>
+          <div className="flex justify-between text-lg font-bold">
+            <p>You have to pay (10%)</p>
+            <p>৳{price * quantity * 0.1}</p>
+          </div>
+        </div>
+
+        <FormField
+          control={form.control}
+          name="paymentMethod"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Payment Method</FormLabel>
+              <Select onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Payment Method" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {paymentMethods.map((method, index) => (
+                    <SelectItem key={index} value={method}>
+                      {method}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="transactionId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Transaction ID</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your transaction ID" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button
+          type="submit"
+          className="disabled:cursor-wait"
+          disabled={form.formState.isSubmitting}
+        >
           {form.formState.isSubmitting ? "Submiting.." : "Submit"}
         </Button>
       </form>
