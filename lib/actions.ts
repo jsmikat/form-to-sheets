@@ -1,11 +1,60 @@
 "use server";
 
-import { JWT } from "google-auth-library";
-import { GoogleSpreadsheet } from "google-spreadsheet";
+import { FormProps } from "@/lib/schema";
+import { document } from "@/services/spreadsheetClient";
 
-import { Inputs } from "@/components/OrderForm";
+export async function postFormGoogleSpreadsheet({
+  name,
+  email,
+  address,
+  product,
+}: FormProps) {
+  try {
+    const date = new Date().toLocaleDateString("en-us");
 
-// export async function postForm({ name, email, address }: Inputs) {
+    await document.loadInfo();
+
+    const sheet = document.sheetsByIndex[0];
+
+    await sheet.addRow({
+      Email: email,
+      Name: name,
+      Address: address,
+      Product: product,
+      Date: date,
+    });
+
+    return { status: 200 };
+  } catch (err) {
+    console.error("Failed to submit the form", err);
+    throw new Error("Failed to submit the form");
+  }
+}
+
+export async function getOptions() {
+  try {
+    await document.loadInfo();
+
+    const sheet = document.sheetsByIndex[2];
+
+    const rows = await sheet.getRows();
+
+    const values = rows.map((row) => ({
+      options: row.get("Options"),
+      prices: row.get("Price"),
+    }));
+
+    const options = values.map((value) => value.options);
+    const prices = values.map((value) => value.prices);
+
+    return { data:{ options, prices }, status: 200 };
+  } catch (err) {
+    console.error("Failed to get options", err);
+    throw new Error("Failed to get options");
+  }
+}
+
+// export async function postForm({ name, email, address }: FormProps) {
 //   try {
 //     const auth = new google.auth.GoogleAuth({
 //       credentials: {
@@ -41,44 +90,3 @@ import { Inputs } from "@/components/OrderForm";
 //     throw new Error("Failed to submit the form");
 //   }
 // }
-
-export async function postFormGoogleSpreadsheet({
-  name,
-  email,
-  address,
-}: Inputs) {
-  try {
-    const auth = new JWT({
-      email: process.env.GOOGLE_CLIENT_EMAIL,
-      key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      scopes: [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive.file",
-      ],
-    });
-
-    const doc = new GoogleSpreadsheet(
-      process.env.GOOGLE_SHEET_ID as string,
-      auth
-    );
-
-    const date = new Date().toLocaleDateString("en-us");
-
-    await doc.loadInfo();
-    console.log(doc.title);
-
-    const sheet = doc.sheetsByIndex[0];
-
-    await sheet.addRow({
-      Email: email,
-      Name: name,
-      Address: address,
-      Date: date,
-    });
-
-    return { status: 200 };
-  } catch (err) {
-    console.error("Failed to submit the form", err);
-    throw new Error("Failed to submit the form");
-  }
-}

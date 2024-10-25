@@ -12,8 +12,10 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/gapi": "^0.0.47",
+    "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "eslint-config-prettier": "^9.1.0",

@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,26 +16,58 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { postFormGoogleSpreadsheet } from "@/lib/actions";
+import { FormProps, formSchema } from "@/lib/schema";
 
-const formSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  email: z.string().email(),
-  address: z.string().min(1, { message: "Address is required" }),
-});
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
-export type Inputs = z.infer<typeof formSchema>;
+interface ProductProps {
+  options: string[];
+  prices: string[];
+}
 
-export default function OrderForm() {
-  const form = useForm<Inputs>({
+export default function OrderForm({
+  productOptions,
+}: {
+  productOptions: ProductProps;
+}) {
+  // const [dropdownOptions, setDropdownOptions] = useState<
+  //   { options: string[]; prices: string[] } | undefined
+  // >();
+
+  const form = useForm<FormProps>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
       address: "",
+      product: "",
     },
   });
 
-  async function onSubmit(values: Inputs) {
+  // useEffect(() => {
+  //   async function fetchOptions() {
+  //     try {
+  //       const response = await axios.get("/api/spreadsheet");
+  //       if (response.status !== 200) {
+  //         throw new Error("Failed to fetch options");
+  //       }
+  //       const data = response.data;
+  //       setDropdownOptions(data);
+  //     } catch (error) {
+  //       console.error("Failed to fetch options", error);
+  //     }
+  //   }
+
+  //   fetchOptions();
+  // }, []);
+
+  async function onSubmit(values: FormProps) {
     try {
       const response = await postFormGoogleSpreadsheet(values);
       if (response.status === 200) {
@@ -101,6 +132,29 @@ export default function OrderForm() {
                 />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name={"product"}
+          render={({ field }) => (
+            <FormItem>
+              <Select onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Product" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {productOptions.options.map((option, index) => (
+                    <SelectItem key={index} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </FormItem>
           )}
         />
