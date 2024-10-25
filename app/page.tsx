@@ -1,4 +1,5 @@
 import OrderForm from "@/components/OrderForm";
+import Cover from "@/components/cover";
 import { getOptions } from "@/lib/actions";
 
 export default async function Home() {
@@ -6,7 +7,8 @@ export default async function Home() {
 
   return (
     <div className="m-10 grid place-content-center">
-      <h1 className="text-4xl font-bold">Customer Details</h1>
+      <Cover />
+      <h1 className="mt-8 text-center text-4xl font-bold">Order Form</h1>
       {productOptions ? (
         <OrderForm productOptions={productOptions.data} />
       ) : (

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -226,7 +227,23 @@ export default function OrderForm({
             <p>৳{price * quantity * 0.1}</p>
           </div>
         </div>
-
+        <div className="flex items-center justify-between gap-8 rounded-sm border-2 pl-2 pr-4">
+          <div className="flex">
+            <Image
+              src="/logo/bkash.svg"
+              width={70}
+              height={70}
+              alt="bkash logo"
+            />
+            <Image
+              src="/logo/nagad.svg"
+              width={70}
+              height={70}
+              alt="nagad logo"
+            />
+          </div>
+          <p className="font-bold">01945227623</p>
+        </div>
         <FormField
           control={form.control}
           name="paymentMethod"
