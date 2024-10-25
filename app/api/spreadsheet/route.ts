@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import { document } from "@/services/spreadsheetClient";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     await document.loadInfo();
     const sheet = document.sheetsByIndex[2];
