@@ -4,6 +4,8 @@ import React from "react";
 
 import { Toaster } from "sonner";
 
+import { cn } from "@/lib/utils";
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -18,8 +20,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Template",
-  description: "A Next.js template with Tailwind CSS and TypeScript",
+  title: "Mridu's Canva",
+  description: " Order procucts from Mridu's Canva",
 };
 
 export default function RootLayout({
@@ -36,7 +38,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(geistSans.variable, geistMono.variable, "antialiased")}
       >
         {children}
         <Toaster position="top-right" expand richColors closeButton />

@@ -217,7 +217,7 @@ export default function OrderForm({
           <span className="text-rose-700">*</span> You have to pay 10% of the
           total cost to confirm your order.
         </p>
-        <div className="rounded-sm border border-green-600 p-4">
+        <div className="rounded-sm border border-[#fcbf49] p-4">
           <div className="flex justify-between">
             <p className="text-sm">Total Price</p>
             <p className="text-sm">৳{price * quantity}</p>
@@ -227,18 +227,18 @@ export default function OrderForm({
             <p>৳{price * quantity * 0.1}</p>
           </div>
         </div>
-        <div className="flex items-center justify-between gap-8 rounded-sm border-2 pl-2 pr-4">
+        <div className="flex h-12 items-center justify-between gap-8 rounded-sm border border-[#fcbf49] pl-2 pr-4">
           <div className="flex">
             <Image
               src="/logo/bkash.svg"
-              width={70}
-              height={70}
+              width={60}
+              height={60}
               alt="bkash logo"
             />
             <Image
               src="/logo/nagad.svg"
-              width={70}
-              height={70}
+              width={60}
+              height={60}
               alt="nagad logo"
             />
           </div>
@@ -285,7 +285,7 @@ export default function OrderForm({
 
         <Button
           type="submit"
-          className="disabled:cursor-wait"
+          className="bg-[#fcbf49] text-black hover:bg-[#fba824] disabled:cursor-not-allowed"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "Submiting.." : "Submit"}

@@ -3,6 +3,26 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
 }
+
+#form-title {
+  color: #003049;
+  position: relative;
+  margin-bottom: 1rem;
+  /* background-color: aqua; */
+}
+
+#form-title::after {
+  content: "";
+  position: absolute;
+  border-radius: 5px;
+  bottom: -2px;
+  width: 14rem;
+  height: 2.5rem;
+  z-index: -1;
+  transform: skewX(-10deg);
+  background-color: #fcbf49;
+}
+
