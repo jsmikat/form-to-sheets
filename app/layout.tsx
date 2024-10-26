@@ -4,8 +4,6 @@ import React from "react";
 
 import { Toaster } from "sonner";
 
-import { cn } from "@/lib/utils";
-
 import "./globals.css";
 
 const geistSans = localFont({
@@ -38,7 +36,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={cn(geistSans.variable, geistMono.variable, "antialiased")}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
         <Toaster position="top-right" expand richColors closeButton />

@@ -9,7 +9,6 @@ function Cover() {
         alt="Cover"
         height={320}
         width={820}
-        objectFit="cover"
       />
     </div>
   );
