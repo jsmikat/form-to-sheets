@@ -227,21 +227,21 @@ export default function OrderForm({
             <p>৳{price * quantity * 0.1}</p>
           </div>
         </div>
-        <div className="flex h-12 items-center justify-between gap-8 rounded-sm border border-[#fcbf49] pl-2 pr-4">
+        <div className="flex h-12 items-center justify-between gap-8 rounded-sm border border-[#fcbf49] pl-3 pr-4">
           <div className="flex">
-            <Image
-              className="size-[60px]"
-              src="/logo/bkash.svg"
-              width={60}
-              height={60}
-              alt="bkash logo"
-            />
             <Image
               className="size-[60px]"
               src="/logo/nagad.svg"
               width={60}
               height={60}
               alt="nagad logo"
+            />
+            <Image
+              className="size-[60px]"
+              src="/logo/bkash.svg"
+              width={60}
+              height={60}
+              alt="bkash logo"
             />
           </div>
           <p className="font-bold">01945227623</p>
