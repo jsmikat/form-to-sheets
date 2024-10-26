@@ -231,14 +231,14 @@ export default function OrderForm({
           <div className="flex items-center">
             <Image
               className="size-[50px]"
-              src="/logo/bkash.svg"
+              src="bkash.svg"
               width={50}
               height={50}
               alt="bkash logo"
             />
             <Image
               className="size-[60px]"
-              src="/logo/nagad.svg"
+              src="nagad.svg"
               width={60}
               height={60}
               alt="nagad logo"
