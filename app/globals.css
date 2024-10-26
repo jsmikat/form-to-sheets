@@ -8,21 +8,21 @@
 }
 
 #form-title {
+  height: 2.2rem;
   color: #003049;
   position: relative;
-  margin-bottom: 1rem;
-  /* background-color: aqua; */
+  overflow: hidden;
+  padding-left: 12px;
 }
 
 #form-title::after {
   content: "";
   position: absolute;
-  border-radius: 5px;
-  bottom: -2px;
-  width: 14rem;
-  height: 2.5rem;
+  left: -5px;
+  width: 12rem;
+  height: 2.2rem;
   z-index: -1;
   transform: skewX(-10deg);
+  transform-origin: top right;
   background-color: #fcbf49;
 }
-

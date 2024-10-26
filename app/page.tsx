@@ -8,10 +8,7 @@ export default async function Home() {
   return (
     <div className="m-10 grid place-content-center">
       <Cover />
-      <h1
-        id="form-title"
-        className="mt-8 inline-flex justify-center text-4xl font-bold"
-      >
+      <h1 id="form-title" className="mt-8 inline-flex text-3xl font-bold">
         Order Form
       </h1>
       {productOptions ? (
