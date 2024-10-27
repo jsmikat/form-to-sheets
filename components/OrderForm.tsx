@@ -85,6 +85,7 @@ export default function OrderForm({
         toast.error("Failed to submit the form. Please try again.");
       }
       form.reset();
+      setPrice(0);
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -172,6 +173,7 @@ export default function OrderForm({
                   );
                   setPrice(selectedPrice);
                 }}
+                value={field.value}
               >
                 <FormControl>
                   <SelectTrigger>
@@ -252,7 +254,7 @@ export default function OrderForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Payment Method</FormLabel>
-              <Select onValueChange={field.onChange}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select Payment Method" />
