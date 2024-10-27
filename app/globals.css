@@ -1,28 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "Poppins", sans-serif;
+}
 @layer base {
   :root {
     --radius: 0.5rem;
   }
-}
-
-#form-title {
-  height: 2.2rem;
-  color: #003049;
-  position: relative;
-  overflow: hidden;
-  padding-left: 12px;
-}
-
-#form-title::after {
-  content: "";
-  position: absolute;
-  left: -5px;
-  width: 12rem;
-  height: 2.2rem;
-  z-index: -1;
-  transform: skewX(-10deg);
-  transform-origin: top right;
-  background-color: #fcbf49;
 }

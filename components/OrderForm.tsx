@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,6 +41,7 @@ export default function OrderForm({
 }: {
   productOptions: ProductProps;
 }) {
+  const router = useRouter();
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
@@ -81,11 +83,13 @@ export default function OrderForm({
         toast.success(
           "Your order has been submitted successfully. We will contact you shortly."
         );
+        form.reset();
+        setPrice(0);
+
+        router.push("/submitted");
       } else {
         toast.error("Failed to submit the form. Please try again.");
       }
-      form.reset();
-      setPrice(0);
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -177,7 +181,7 @@ export default function OrderForm({
               >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select Product" />
+                    <SelectValue placeholder="Select Product"/>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -219,7 +223,7 @@ export default function OrderForm({
           <span className="text-rose-700">*</span> You have to pay 10% of the
           total cost to confirm your order.
         </p>
-        <div className="rounded-sm border border-[#fcbf49] p-4">
+        <div className="rounded-sm border border-primary p-4 shadow-md">
           <div className="flex justify-between">
             <p className="text-sm">Total Price</p>
             <p className="text-sm">৳{price * quantity}</p>
@@ -229,7 +233,7 @@ export default function OrderForm({
             <p>৳{price * quantity * 0.1}</p>
           </div>
         </div>
-        <div className="flex h-12 items-center justify-between gap-8 rounded-sm border border-[#fcbf49] pl-3 pr-4">
+        <div className="flex h-12 items-center justify-between gap-8 rounded-sm border border-primary pl-3 pr-4 shadow-md">
           <div className="flex items-center">
             <Image
               className="size-[50px]"
@@ -289,7 +293,7 @@ export default function OrderForm({
 
         <Button
           type="submit"
-          className="bg-[#fcbf49] text-black hover:bg-[#fba824] disabled:cursor-not-allowed"
+          className="bg-primary text-black hover:bg-[#fba824] disabled:cursor-not-allowed"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "Submiting.." : "Submit"}

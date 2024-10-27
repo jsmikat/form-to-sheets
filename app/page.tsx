@@ -8,9 +8,7 @@ export default async function Home() {
   return (
     <div className="m-10 grid place-content-center">
       <Cover />
-      <h1 id="form-title" className="mt-8 inline-flex text-3xl font-bold">
-        Order Form
-      </h1>
+
       {productOptions ? (
         <OrderForm productOptions={productOptions.data} />
       ) : (
