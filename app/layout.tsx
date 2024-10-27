@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 
 import "./globals.css";
 
-export const poppins = Poppins({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "700", "900"],
   variable: "--font-poppins",
