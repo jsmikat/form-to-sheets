@@ -1,11 +1,14 @@
+import { convertToDirectGoogleDriveLink } from "@/lib/utils";
 import Image from "next/image";
 
-function Cover() {
+function Cover({ link }: { link: string }) {
+  const directLink = convertToDirectGoogleDriveLink(link);
   return (
     <div className="">
       <Image
-        className="rounded-lg"
-        src="/cover.jpg"
+        className="size-auto rounded-lg"
+        src={directLink}
+        priority={true}
         alt="Cover"
         height={320}
         width={820}

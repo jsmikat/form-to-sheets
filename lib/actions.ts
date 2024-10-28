@@ -52,10 +52,12 @@ export async function getOptions() {
       prices: row.get("Price"),
     }));
 
+    const coverLink = rows[0].get("Cover Photo Drive Link");
+
     const options = values.map((value) => value.options);
     const prices = values.map((value) => value.prices);
 
-    return { data: { options, prices }, status: 200 };
+    return { data: { options, prices, coverLink }, status: 200 };
   } catch (err) {
     console.error("Failed to get options", err);
     throw new Error("Failed to get options");

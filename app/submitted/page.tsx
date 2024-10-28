@@ -4,7 +4,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export default function ThankYouPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center ">
+    <div className="flex min-h-dvh items-center justify-center ">
       <div className="max-w-md space-y-6 rounded-lg p-6 text-center">
         <h1 className="text-4xl font-black text-primary">Thank You!</h1>
         <p className="text-lg text-gray-700">

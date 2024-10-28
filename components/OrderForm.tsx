@@ -83,6 +83,7 @@ export default function OrderForm({
         toast.success(
           "Your order has been submitted successfully. We will contact you shortly."
         );
+
         form.reset();
         setPrice(0);
 
@@ -181,7 +182,7 @@ export default function OrderForm({
               >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select Product"/>
+                    <SelectValue placeholder="Select Product" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
