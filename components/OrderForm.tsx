@@ -251,7 +251,7 @@ export default function OrderForm({
               alt="nagad logo"
             />
           </div>
-          <p className="font-bold">01945227623</p>
+          <p className="font-bold">019XXXXXXXX</p>
         </div>
         <FormField
           control={form.control}
