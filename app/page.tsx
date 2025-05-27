@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <div className="m-10 grid place-content-center">
-      <Cover link={productOptions.data.coverLink}/>
+      <Cover link={productOptions.data.coverLink} />
 
       {productOptions ? (
         <OrderForm productOptions={productOptions.data} />

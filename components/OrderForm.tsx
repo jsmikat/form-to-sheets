@@ -59,23 +59,6 @@ export default function OrderForm({
     },
   });
 
-  // useEffect(() => {
-  //   async function fetchOptions() {
-  //     try {
-  //       const response = await axios.get("/api/spreadsheet");
-  //       if (response.status !== 200) {
-  //         throw new Error("Failed to fetch options");
-  //       }
-  //       const data = response.data;
-  //       setDropdownOptions(data);
-  //     } catch (error) {
-  //       console.error("Failed to fetch options", error);
-  //     }
-  //   }
-
-  //   fetchOptions();
-  // }, []);
-
   async function onSubmit(values: FormProps) {
     try {
       const response = await postFormGoogleSpreadsheet(values);
@@ -101,7 +84,7 @@ export default function OrderForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="relative mx-auto w-full max-w-3xl space-y-8 py-10"
+        className="relative mx-auto w-full max-w-[420px] space-y-8 py-10"
       >
         <FormField
           control={form.control}

@@ -1,1 +1,1 @@
-export const paymentMethods = ["Bkash", "Nagad", "Rocket"];
+export const paymentMethods = ["Bkash", "Nagad"];

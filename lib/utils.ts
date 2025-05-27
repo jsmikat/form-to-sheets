@@ -12,6 +12,6 @@ export function convertToDirectGoogleDriveLink(url: string): string {
   if (match && match[1]) {
     return `https://drive.google.com/uc?export=view&id=${match[1]}`;
   } else {
-    return `cover.jpg`; // Handle invalid input gracefully
+    return `cover.jpg`;
   }
 }
