@@ -1,8 +1,5 @@
 ## I used `google-spreadsheet` to connect my app with google sheets.
 
-<<<<<<< HEAD
-- For any query contact me.
-=======
 This is a **Next.js** project with a frontend form that submits data to **Google Sheets** using the **Google Sheets API** configured via **Google Cloud Console**. It also includes a small **Google Apps Script** snippet to format the sheet data after submission.
 
 ---
@@ -115,4 +112,3 @@ function mergeCustomerOrderRows() {
 npm run dev
 ```
 Submit the form, your data should appear in the Google Sheet!
->>>>>>> 696aec7 (Update README.md.v3)
