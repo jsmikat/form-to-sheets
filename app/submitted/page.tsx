@@ -1,10 +1,11 @@
 import Link from "next/link";
 
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function ThankYouPage() {
   return (
-    <div className="flex min-h-dvh items-center justify-center ">
+    <div className="flex min-h-dvh flex-col items-center justify-center ">
       <div className="max-w-md space-y-6 rounded-lg p-6 text-center">
         <h1 className="text-4xl font-black text-primary">Thank You!</h1>
         <p className="text-lg text-gray-700">
@@ -26,10 +27,10 @@ export default function ThankYouPage() {
 
 function ConnectWithUs() {
   const socialLinks = [
-    { href: "https://facebook.com", icon: <FaFacebook />, name: "Facebook" },
-    { href: "https://twitter.com", icon: <FaTwitter />, name: "Twitter" },
-    { href: "https://instagram.com", icon: <FaInstagram />, name: "Instagram" },
-    { href: "https://linkedin.com", icon: <FaLinkedin />, name: "LinkedIn" },
+    { href: "https://facebook.com/jsmikat", icon: <FaFacebook />, name: "Facebook" },
+    { href: "https://x.com/jsmikat", icon: <FaXTwitter />, name: "Twitter" },
+    { href: "https://instagram.com/js_mikat", icon: <FaInstagram />, name: "Instagram" },
+    { href: "https://linkedin.com/in/jsmikat", icon: <FaLinkedin />, name: "LinkedIn" },
   ];
 
   return (
